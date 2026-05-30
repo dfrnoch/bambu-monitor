@@ -1,4 +1,6 @@
-FROM oven/bun:1.3.14 AS build
+ARG BUN_VERSION=1.3.14
+
+FROM oven/bun:${BUN_VERSION} AS build
 WORKDIR /app
 
 COPY package.json bun.lock bunfig.toml tsconfig.json tsconfig.base.json ./
