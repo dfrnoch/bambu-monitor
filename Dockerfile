@@ -16,6 +16,7 @@ RUN useradd --system --uid 10001 --create-home bambu
 
 WORKDIR /app
 COPY --from=builder /app/target/release/bambu-monitor /usr/local/bin/bambu-monitor
+COPY assets ./assets
 
 ENV HOST=0.0.0.0
 ENV PORT=3000
