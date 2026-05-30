@@ -1,0 +1,39 @@
+services:
+  api:
+    image: ghcr.io/dfrnoch/bambu-monitor-api:latest
+    restart: unless-stopped
+    depends_on:
+      - go2rtc
+    environment:
+      PORT: "3000"
+      DATA_DIR: /data
+      AUTO_CONNECT: "true"
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:8080,http://127.0.0.1:8080}
+      GO2RTC_URL: http://go2rtc:1984
+      GO2RTC_PUBLIC_URL: ${GO2RTC_PUBLIC_URL:-http://localhost:1984}
+    ports:
+      - "${API_PORT:-3000}:3000"
+    volumes:
+      - bambu_data:/data
+
+  ui:
+    image: ghcr.io/dfrnoch/bambu-monitor-ui:latest
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "${UI_PORT:-8080}:80"
+
+  go2rtc:
+    image: alexxit/go2rtc:latest
+    restart: unless-stopped
+    ports:
+      - "${GO2RTC_PORT:-1984}:1984"
+      - "${GO2RTC_WEBRTC_PORT:-8555}:8555/tcp"
+      - "${GO2RTC_WEBRTC_PORT:-8555}:8555/udp"
+    volumes:
+      - go2rtc_config:/config
+
+volumes:
+  bambu_data:
+  go2rtc_config:

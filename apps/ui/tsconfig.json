@@ -1,0 +1,21 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"composite": true,
+		"tsBuildInfoFile": ".tsbuildinfo",
+		"useDefineForClassFields": true,
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
+		"allowSyntheticDefaultImports": true,
+		"jsx": "react-jsx",
+		"ignoreDeprecations": "6.0",
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		}
+	},
+	"include": ["src"],
+	"exclude": ["node_modules"],
+	"references": [{ "path": "./tsconfig.node.json" }]
+}

@@ -1,0 +1,13 @@
+.git
+.github
+.husky
+.vscode
+node_modules
+**/node_modules
+**/dist
+**/.tsbuildinfo
+apps/api/data
+.env
+**/.env
+*.log
+.DS_Store
