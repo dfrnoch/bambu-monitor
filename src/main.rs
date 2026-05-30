@@ -72,8 +72,10 @@ fn shell(_options: LeptosOptions) -> impl IntoView {
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
                 <meta name="apple-mobile-web-app-title" content="Bambu Monitor" />
                 <link rel="manifest" href="/assets/manifest.webmanifest" />
+                <link rel="stylesheet" href="/assets/app.css" />
                 <link rel="icon" href="/assets/icon.svg" type="image/svg+xml" />
                 <link rel="apple-touch-icon" href="/assets/icon-192.svg" />
+                <script defer src="/assets/app.js"></script>
                 <title>"Bambu Monitor"</title>
             </head>
             <body>
