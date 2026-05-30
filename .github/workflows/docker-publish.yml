@@ -11,17 +11,33 @@ permissions:
   packages: write
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy,rustfmt
+
+      - name: Cache Rust
+        uses: Swatinem/rust-cache@v2
+
+      - name: Format
+        run: cargo fmt --check
+
+      - name: Clippy
+        run: cargo clippy --all-targets -- -D warnings
+
+      - name: Test
+        run: cargo test
+
   publish:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - service: api
-            image: ghcr.io/dfrnoch/bambu-monitor-api
-            dockerfile: docker/api.Dockerfile
-          - service: ui
-            image: ghcr.io/dfrnoch/bambu-monitor-ui
-            dockerfile: docker/ui.Dockerfile
+    needs: check
 
     steps:
       - name: Checkout
@@ -41,18 +57,20 @@ jobs:
         id: meta
         uses: docker/metadata-action@v6
         with:
-          images: ${{ matrix.image }}
+          images: ghcr.io/dfrnoch/bambu-monitor-rust
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=sha,prefix=
 
-      - name: Build and push ${{ matrix.service }}
+      - name: Validate compose
+        run: |
+          docker compose -f compose.yaml config
+
+      - name: Build and push Rust app
         uses: docker/build-push-action@v7
         with:
           context: .
-          file: ${{ matrix.dockerfile }}
+          file: ./Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: |
-            VITE_API_URL=http://localhost:3000

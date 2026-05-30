@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-label="Bambu Monitor">
+  <rect width="192" height="192" rx="42" fill="#111113"/>
+  <path d="M51 66c0-12 10-22 22-22h46c12 0 22 10 22 22v65c0 10-8 18-18 18H69c-10 0-18-8-18-18V66Z" fill="#f4f4f5"/>
+  <path d="M67 73h58v39H67V73Z" fill="#18181b"/>
+  <path d="M76 126h40" stroke="#18181b" stroke-width="10" stroke-linecap="round"/>
+  <path d="M67 45 84 27h24l17 18" stroke="#34d399" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="77" cy="91" r="8" fill="#34d399"/>
+  <circle cx="115" cy="91" r="8" fill="#34d399"/>
+</svg>
