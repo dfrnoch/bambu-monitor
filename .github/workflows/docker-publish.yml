@@ -57,7 +57,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v6
         with:
-          images: ghcr.io/dfrnoch/bambu-monitor-rust
+          images: ghcr.io/dfrnoch/bambu-monitor
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=sha,prefix=
