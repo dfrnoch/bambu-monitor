@@ -47,7 +47,7 @@ jobs:
             type=sha,prefix=
 
       - name: Build and push ${{ matrix.service }}
-        uses: docker/build-push-action@v8
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: ${{ matrix.dockerfile }}
