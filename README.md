@@ -10,7 +10,6 @@ The intended shape is one deployable app:
 - No separate API project.
 
 ## Run
-
 ```bash
 cargo run
 ```
